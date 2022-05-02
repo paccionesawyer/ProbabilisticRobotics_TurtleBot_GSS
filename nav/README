@@ -1,0 +1,51 @@
+Stephanie Bentley
+CS152 
+Homework 5 Individual Portion
+
+Autonomous Navigation using pre-built map
+
+This code navigates the turtlebot to the given coordinates on a pre-built map.
+When the code is run, the turtlebot is expected to begin driving towards the
+goal location, avoiding obstacles. The turtlebot uses its 3d camera sensing to 
+compare surroundings to the map, sending action commands to the turtlebot base.
+
+
+Instructions using default map and coordinates: 
+1. Log in to the turtlebot computer and ssh from another computer
+2. Ensure the turtlebot base is on with the switch on the side
+3. Run 'roslaunch turtlebot_bringup minimal.launch' in a new terminal
+4. In another terminal, start the turtlebot navigation stack with 
+    'roslaunch turtlebot_navigation amcl_demo.launch map_file:=[file_path]/maps/nav.yaml'
+5. To view the visualization of the map and robot location, open a new terminal
+    and run 'roslaunch turtlebot_rviz_launchers view_navigation.launch --screen'
+6. Ensure the location of the robot in rviz matches up to the relative location 
+    in the map. If not, click the “2D Pose Estimate” button and select where the
+    robot should be in the map.
+7. In another new terminal, navigate to the file_path of the project and run
+    'python nav.py' which will navigate to the default coordinates.
+
+Choosing new coordinates:
+1. Complete steps 1-6 above
+2. In another terminal, run 'rostopic echo /amcl_pose' 
+3. On the rviz, click the “2D Pose Estimate” button and select where you want 
+    the robot to go on the map.
+4. In the terminal running 'rostopic echo /amcl_pose', check the x and y coordinates
+    of your goal location and add them to the script.
+5. Reset the robots pose estimate with step 6 above and stop the rostopic window.
+6. In a new terminal, navigate to the file_path of the project and run
+    'python nav.py x y' where x and y are the coordinates you found for the goal location.
+
+Creating a new map:
+1. Open a terminal and run 'roslaunch turtlebot_bringup minimal.launch'
+2. Open a terminal and run 'roslaunch turtlebot_navigation gmapping_demo.launch'
+3. Open a terminal on the turtlebot laptop and run 
+    'roslaunch turtlebot_rviz_launchers view_navigation.launch'
+4. Open a terminal using the ssh connection and run 
+    'roslaunch turtlebot_teleop keyboard_teleop.launch'
+5. Use the teleoperation commands to navigate the turtlebot around the area you
+    want to map.
+6. Save the map by running 
+    'rosrun map_server map_saver -f /[project_file_path]/maps/map.yaml'
+7. Follow the instructions for using the deafult map and coordinates, except in
+    step 4 set the map_file flag to 
+    'map_file:=/[project_file_path]/maps/map.yaml'
