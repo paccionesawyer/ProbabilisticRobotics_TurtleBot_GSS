@@ -270,11 +270,11 @@ class CrowdSim(gym.Env):
                     noise = np.random.normal(size=5)
                 else:
                     print('noise type not defined')
-                ob[i].px = ob[i].px + noise[0]
-                ob[i].py = ob[i].px + noise[1]
-                ob[i].vx = ob[i].px + noise[2]
-                ob[i].vy = ob[i].px + noise[3]
-                ob[i].radius = ob[i].px + noise[4]
+                ob[i].px += noise[0]
+                ob[i].py += noise[1]
+                ob[i].vx += noise[2]
+                ob[i].vy += noise[3]
+                ob[i].radius += noise[4]
             return ob
         else:
             if self.noise_type == 'uniform':

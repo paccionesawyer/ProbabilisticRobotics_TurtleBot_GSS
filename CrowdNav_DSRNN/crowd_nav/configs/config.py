@@ -76,7 +76,7 @@ class Config(object):
     noise = BaseConfig()
     noise.add_noise = False
     # uniform, gaussian
-    noise.type = "uniform"
+    noise.type = "gaussian"
     noise.magnitude = 0.1
 
     # robot action type
