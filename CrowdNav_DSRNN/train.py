@@ -142,6 +142,7 @@ def main():
 	num_updates = int(
 		config.training.num_env_steps) // config.ppo.num_steps // config.training.num_processes
 
+	print("Num Updates: ", num_updates)
 	for j in range(num_updates):
 
 		if config.training.use_linear_lr_decay:
