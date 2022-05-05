@@ -139,7 +139,7 @@ class Config(object):
     training.log_interval = 20  # log interval, one log per n updates
     training.use_proper_time_limits = False  # compute returns taking into account time limits
     training.cuda_deterministic = False  # sets flags for determinism when using CUDA (potentially slow!)
-    training.cuda = True  # use CUDA for training
+    training.cuda = False  # use CUDA for training
     training.num_processes = 12 # how many training CPU processes to use
     training.output_dir = 'data/dummy'  # the saving directory for train.py
     training.resume = False  # resume training from an existing checkpoint or not
