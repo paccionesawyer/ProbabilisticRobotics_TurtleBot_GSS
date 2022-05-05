@@ -144,8 +144,8 @@ class Agent(object):
     def compute_position(self, action, delta_t):
         self.check_validity(action)
         if self.kinematics == 'holonomic':
-            px = self.px + action.vx * delta_t
-            py = self.py + action.vy * delta_t
+            px = self.px + action.vx * delta_t# + np.random.normal(0, 0.1*self.v_pref)
+            py = self.py + action.vy * delta_t# + np.random.normal(0, 0.1*self.v_pref)
         # unicycle
         else:
             # naive dynamics
