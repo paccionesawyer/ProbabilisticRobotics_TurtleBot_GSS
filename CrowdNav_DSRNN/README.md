@@ -13,7 +13,7 @@ We train our network with model-free deep reinforcement learning without any exp
 We demonstrate that our model outperforms previous methods in challenging crowd navigation scenarios. 
 We successfully transfer the policy learned in the simulator to a real-world TurtleBot 2i.
 
-<img src="/figures/open.jpg" width="450" />
+<img src="figures/open.jpg" width="450" />
 
 
 ## Setup
