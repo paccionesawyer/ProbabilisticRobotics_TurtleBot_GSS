@@ -1,5 +1,6 @@
 from crowd_sim.envs.utils.agent import Agent
 from crowd_sim.envs.utils.state import JointState, JointState_noV
+import numpy as np
 
 class Robot(Agent):
     def __init__(self, config, section):
@@ -8,7 +9,7 @@ class Robot(Agent):
         self.py_bel = None
         self.vx_bel = None
         self.vy_bel = None
-        self.noise_magnitude = config.noise_magnitude
+        self.noise_magnitude = config.noise.magnitude
 
     def act(self, ob):
         if self.policy is None:

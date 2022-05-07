@@ -48,10 +48,14 @@ class Agent(object):
     def set(self, px, py, gx, gy, vx, vy, theta, radius=None, v_pref=None):
         self.px = px
         self.py = py
+        self.px_bel = px # initialize believed state to true state
+        self.py_bel = py
         self.gx = gx
         self.gy = gy
         self.vx = vx
         self.vy = vy
+        self.vx_bel = vx
+        self.vy_bel = vy
         self.theta = theta
 
         if radius is not None:
