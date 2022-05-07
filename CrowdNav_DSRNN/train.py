@@ -166,7 +166,7 @@ def main():
 			if config.sim.render:
 				envs.render()
 			# Obser reward and next obs
-			obs, reward, done, infos = envs.step(action)
+			obs, reward, done, infos = envs.step(action) # CrowdSimDict.step()
 			# print(done)
 
 			for info in infos:
