@@ -48,13 +48,13 @@ class CrowdSimDict(CrowdSim):
         # nodes
         visible_humans, num_visibles, human_visibility = self.get_num_human_in_fov()
 
-        ob['robot_node'] = self.robot.get_full_state_list_noV()
+        ob['robot_node'] = self.robot.get_noisy_full_state_list_noV()
 
         self.update_last_human_states(human_visibility, reset=reset)
 
         # edges
         # temporal edge: robot's velocity
-        ob['temporal_edges'] = np.array([self.robot.vx, self.robot.vy])
+        ob['temporal_edges'] = np.array([self.robot.vx_bel, self.robot.vy_bel])
         # spatial edges: the vector pointing from the robot position to each human's position
         ob['spatial_edges'] = np.zeros((self.human_num, 2))
         for i in range(self.human_num):
