@@ -39,14 +39,23 @@ class Robot(Agent):
         self.check_validity(action)
         pos = self.compute_position(action, self.time_step)
         self.px, self.py = pos
-        self.px_bel, self.py_bel = pos + np.random.normal(0, self.noise_magnitude, size=2)
+
+        pos2 = self.compute_position_noise(action,self.time_step)
+        self.px_bel, self.py_bel = pos2
+
         if self.kinematics == 'holonomic':
             self.vx = action.vx
             self.vy = action.vy
 
-            self.vx_bel = action.vx + np.random.normal(0, self.noise_magnitude)
-            self.vy_bel = action.vy + np.random.normal(0, self.noise_magnitude)
-        else:
-            self.theta = (self.theta + action.r) % (2 * np.pi)
-            self.vx = action.v * np.cos(self.theta)
-            self.vy = action.v * np.sin(self.theta)
+    def compute_position_noise(self, action, delta_t):
+        self.check_validity(action)
+
+        self.vx_bel = action.vx + np.random.normal(0, self.noise_magnitude)
+        self.vy_bel = action.vy + np.random.normal(0, self.noise_magnitude)
+
+        if self.kinematics == 'holonomic':
+            px = self.px_bel + self.vx_bel * delta_t# + np.random.normal(0, 0.1*self.v_pref)
+            py = self.py_bel + self.vy_bel * delta_t# + np.random.normal(0, 0.1*self.v_pref)
+
+
+        return px, py

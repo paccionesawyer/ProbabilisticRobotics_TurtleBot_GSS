@@ -21,7 +21,7 @@ class Agent(object):
         self.FOV = np.pi * subconfig.FOV
         # for humans: we only have holonomic kinematics; for robot: depend on config
         self.kinematics = 'holonomic' if section == 'humans' else config.action_space.kinematics
-        self.px = None
+        self.px = None # True Values
         self.py = None
         self.gx = None
         self.gy = None
