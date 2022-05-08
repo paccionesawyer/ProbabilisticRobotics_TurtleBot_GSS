@@ -39,7 +39,6 @@ class CrowdSimDict(CrowdSim):
         high = np.inf * np.ones([2, ])
         self.action_space = gym.spaces.Box(-high, high, dtype=np.float32)
 
-
     # generate observation for each timestep
     # reset = True: reset calls this function; reset = False: step calls this function
     def generate_ob(self, reset):
