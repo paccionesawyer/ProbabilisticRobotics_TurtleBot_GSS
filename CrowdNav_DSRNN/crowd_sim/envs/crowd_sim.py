@@ -939,10 +939,13 @@ class CrowdSim(gym.Env):
         robotX,robotY=self.robot.get_position()
 
         robot=plt.Circle((robotX,robotY), self.robot.radius, fill=True, color=robot_color)
+        robot_bel=plt.Circle((self.robot.px_bel, self.robot.py_bel), self.robot.radius, fill=False, color="blue")
         ax.add_artist(robot)
         artists.append(robot)
+        ax.add_artist(robot_bel)
+        artists.append(robot_bel)
 
-        plt.legend([robot, goal], ['Robot', 'Goal'], fontsize=16)
+        plt.legend([robot, goal, robot_bel], ['Robot', 'Goal', 'Believed Position'], fontsize=16)
 
 
         # compute orientation in each step and add arrow to show the direction
