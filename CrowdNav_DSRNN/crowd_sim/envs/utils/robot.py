@@ -48,7 +48,7 @@ class Robot(Agent):
     def kalman(self, px, py, vx, vy) -> KalmanFilter:
         f = KalmanFilter(dim_x=4, dim_z=2, dim_u=2)
 
-        f.x = np.array([px, vx, py,  vy]).T 
+        f.x = np.array([px, vx, py,  vy])
 
         f.F = np.array([[1, self.time_step, 0,  0],
                         [0,  1, 0,  0],
@@ -61,7 +61,7 @@ class Robot(Agent):
         # u = np.array((action.vx - self.vx), (action.vy - self.vy))
 
         f.B = np.array([[0, 1, 0, 0],
-                       [0, 0, 0, 1]])
+                       [0, 0, 0, 1]]).T
 
         f.H = np.array([[1, 0, 0, 0],
                         [0, 0, 1, 0]])
@@ -95,12 +95,12 @@ class Robot(Agent):
 
         pos = self.compute_position(action, self.time_step)
         self.px, self.py = pos
-        self.px_bel, self.py_bel = pos
 
-        if (self.mode == "noisy"):
-            pos2 = self.compute_position_noise(action, self.time_step)
-            self.px_bel, self.py_bel = pos2
-
+        if (self.mode == "normal"):
+            self.px_bel, self.py_bel = pos
+        elif (self.mode == "noisy"):
+            pos_bel = self.compute_position_noise(action, self.time_step)
+            self.px_bel, self.py_bel = pos_bel
         elif (self.mode == "kalman"):
             state = self.compute_position_kf(action, self.time_step)
             self.px_bel, self.vx_bel, self.py_bel, self.vy_bel = state
@@ -108,6 +108,8 @@ class Robot(Agent):
         if self.kinematics == 'holonomic':
             self.vx = action.vx
             self.vy = action.vy
+            # print("Actual state: ", [self.px, self.vx, self.py, self.vy])
+            # print()
 
     def compute_position_noise(self, action, delta_t):
         self.check_validity(action)
@@ -125,15 +127,18 @@ class Robot(Agent):
     def compute_position_kf(self, action, delta_t):
         self.check_validity(action)
 
-        u = np.array([(action.vx - self.vx_bel), (action.vy - self.vy_bel)])
+        u = np.array([(action.vx - self.vx_bel), (action.vy - self.vy_bel)]).T
 
         # self.vx_bel = action.vx + np.random.normal(0, self.noise_magnitude)
         # self.vy_bel = action.vy + np.random.normal(0, self.noise_magnitude)
 
         self.kf.predict(u=u)
+        # print("Predicted state: ", self.kf.x)
 
         z = np.array([self.px + np.random.normal(0, self.noise_magnitude), self.py + np.random.normal(0, self.noise_magnitude)])
         self.kf.update(z)
+
+        # print("Measured state: ", self.kf.x)
 
         if self.kinematics == 'holonomic':
             px = self.kf.x[0]

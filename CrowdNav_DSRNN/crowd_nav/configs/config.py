@@ -78,7 +78,7 @@ class Config(object):
     noise.add_noise = False
     # uniform, gaussian
     noise.type = "gaussian"
-    noise.magnitude = 0.1
+    noise.magnitude = 0.2
 
     # robot action type
     action_space = BaseConfig()
@@ -134,7 +134,7 @@ class Config(object):
     training.eps = 1e-5  # RMSprop optimizer epsilon
     training.alpha = 0.99  # RMSprop optimizer alpha
     training.max_grad_norm = 0.5  # max norm of gradients
-    training.num_env_steps = 10e5  # number of environment steps to train: 10e6 for holonomic, 20e6 for unicycle
+    training.num_env_steps = 5e6  # number of environment steps to train: 10e6 for holonomic, 20e6 for unicycle
     training.use_linear_lr_decay = False  # use a linear schedule on the learning rate: True for unicycle, False for holonomic
     training.save_interval = 200  # save interval, one save per n updates
     training.log_interval = 20  # log interval, one log per n updates
@@ -142,7 +142,7 @@ class Config(object):
     training.cuda_deterministic = False  # sets flags for determinism when using CUDA (potentially slow!)
     training.cuda = False  # use CUDA for training
     training.num_processes = 12 # how many training CPU processes to use
-    training.output_dir = 'data/baseline'  # the saving directory for train.py
+    training.output_dir = 'data/kalman_5e6'  # the saving directory for train.py
     training.resume = False  # resume training from an existing checkpoint or not
     training.load_path = 'data/noisy/checkpoints/00600.pt'  # if resume = True, load from the following checkpoint
     training.overwrite = False  # whether to overwrite the output directory in training

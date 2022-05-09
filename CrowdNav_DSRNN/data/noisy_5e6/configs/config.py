@@ -71,13 +71,14 @@ class Config(object):
     robot.v_pref = 1  # max velocity of the robot
     # robot FOV = this values * PI
     robot.FOV = 2.
+    robot.mode = "noisy" # "normal", "noisy", "kalman"
 
     # add noise to observation or not
     noise = BaseConfig()
     noise.add_noise = False
     # uniform, gaussian
     noise.type = "gaussian"
-    noise.magnitude = 0
+    noise.magnitude = 0.2
 
     # robot action type
     action_space = BaseConfig()
