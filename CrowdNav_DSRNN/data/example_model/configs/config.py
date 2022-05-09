@@ -12,7 +12,7 @@ class Config(object):
     env.time_limit = 50
     env.time_step = 0.25
     env.val_size = 100
-    env.test_size = 500
+    env.test_size = 2500
     env.randomize_attributes = True
     env.seed = 0  # env random seed
 
@@ -68,6 +68,7 @@ class Config(object):
     robot.v_pref = 1
     # FOV = this values * PI
     robot.FOV = 2.
+    robot.mode = 'normal'
 
     noise = BaseConfig()
     noise.add_noise = False
@@ -139,5 +140,5 @@ class Config(object):
     training.output_dir = 'data/dummy'  # the saving directory for train.py
     training.resume = False  # resume training from an existing checkpoint or not
     training.load_path = None  # if resume = True, load from the following checkpoint
-    training.overwrite = True  # whether to overwrite the output directory in training
+    training.overwrite = False  # whether to overwrite the output directory in training
     training.num_threads = 1  # number of threads used for intraop parallelism on CPU
