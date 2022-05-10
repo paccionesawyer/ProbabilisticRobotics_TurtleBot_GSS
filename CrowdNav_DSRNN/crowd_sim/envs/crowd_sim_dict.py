@@ -50,7 +50,8 @@ class CrowdSimDict(CrowdSim):
         ob['robot_node'] = self.robot.get_noisy_full_state_noV()
 
         self.update_last_human_states(human_visibility, reset=reset)
-
+        
+        # Updated to use believed position
         # edges
         # temporal edge: robot's velocity
         ob['temporal_edges'] = np.array([self.robot.vx_bel, self.robot.vy_bel])
