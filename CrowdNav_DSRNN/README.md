@@ -31,11 +31,17 @@ Below are the instructions for training and testing policies.
 
 ### Novel Code
 This section identifies the major changes made to the code for the Probabilistic Robotics project. Full details of changes can be seen in the commit history.
-`CrowdNav_DSRNN/crowd_nav/configs/config.py`: Config options were added to change the robot mode for the variations of this project and to implement the noise.
-`CrowdNav_DSRNN/crowd_sim/envs/crowd_sim.py`: Rendering for robot believed position was added, as well as modifications for noise.
-`CrowdNav_DSRNN/crowd_sim/envs/crowd_sim_dict.py`: The noise implementation was fixed.
-`CrowdNav_DSRNN/crowd_sim/envs/utils/agent.py`: Noise was implemented between the true and believed agent positions. 
-`CrowdNav_DSRNN/crowd_sim/envs/utils/robot.py`: Kalman filter was added, as well as functions to support computation of the noisy and filter-predicted states.
+
+- `CrowdNav_DSRNN/crowd_nav/configs/config.py`: Config options were added to change the robot mode for the variations of this project and to implement the noise.
+
+- `CrowdNav_DSRNN/crowd_sim/envs/crowd_sim.py`: Rendering for robot believed position was added, as well as modifications for noise.
+
+- `CrowdNav_DSRNN/crowd_sim/envs/crowd_sim_dict.py`: The noise implementation was fixed.
+
+- `CrowdNav_DSRNN/crowd_sim/envs/utils/agent.py`: Noise was implemented between the true and believed agent positions. 
+
+- `CrowdNav_DSRNN/crowd_sim/envs/utils/robot.py`: Kalman filter was added, as well as functions to support computation of the noisy and filter-predicted states.
+
 New models were also added to `data` folder.
 
 ### Change configurations
