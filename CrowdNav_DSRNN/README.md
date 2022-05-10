@@ -31,6 +31,7 @@ Below are the instructions for training and testing policies.
 
 ### Change configurations
 1. Environment configurations and training hyperparameters: modify `crowd_nav/configs/config.py`
+
     a. To run the simulation with the different conditions used in this project, change the `robot.mode` setting in the config file. 
        `"normal"` is the baseline Liu et al. algorithm,  `"noisy"` the added noise variation, and  `"kalman"` the filtered algorithm.
 
