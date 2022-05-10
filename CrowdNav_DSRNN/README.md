@@ -40,11 +40,7 @@ Below are the instructions for training and testing policies.
 python train.py 
 ```
 
-2. Test policies.  
-Please modify the test arguments in the begining of `test.py`.     
-We provide two trained example weights for each type of robot kinematics:  
-    - Holonomic: `data/example_model/checkpoints/27776.pt` 
-    - Unicycle: `data/example_model_unicycle/checkpoints/55554.pt`  
+2. Test policies.   
 ```
 python test.py 
 ```
