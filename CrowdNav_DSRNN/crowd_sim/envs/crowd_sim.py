@@ -270,6 +270,8 @@ class CrowdSim(gym.Env):
                     noise = np.random.normal(size=5)
                 else:
                     print('noise type not defined')
+                    
+                # Added noise implementation
                 ob[i].px += noise[0]
                 ob[i].py += noise[1]
                 ob[i].vx += noise[2]
@@ -942,6 +944,7 @@ class CrowdSim(gym.Env):
         robot_bel=plt.Circle((self.robot.px_bel, self.robot.py_bel), self.robot.radius, fill=False, color="blue")
         ax.add_artist(robot)
         artists.append(robot)
+        # Added visualization of believed position
         ax.add_artist(robot_bel)
         artists.append(robot_bel)
 
