@@ -30,7 +30,7 @@ This repository is organized in three parts:
 Below are the instructions for training and testing policies.
 
 ### Novel Code
-This section identifies the major changes made to the code for the Probabilistic Robotics project. Full details of changes can be seen in the commit history.
+This section identifies the major changes made to the code for the Probabilistic Robotics project. Full details of changes can be seen in the commit history, and specific changes are commented within each file.
 
 - `CrowdNav_DSRNN/crowd_nav/configs/config.py`: Config options were added to change the robot mode for the variations of this project and to implement the noise.
 
