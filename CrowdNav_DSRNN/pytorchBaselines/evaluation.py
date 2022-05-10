@@ -83,8 +83,9 @@ def evaluate(actor_critic, ob_rms, eval_envs, num_processes, device, config, log
             # Obser reward and next obs
             obs, rew, done, infos = eval_envs.step(action)
 
-            path = path + np.linalg.norm(np.array([last_pos[0] - obs['robot_node'][0, 0, 1].cpu().numpy(),
-                                                   last_pos[1] - obs['robot_node'][0, 0, 2].cpu().numpy()]))
+            step_dist = np.linalg.norm(np.array([last_pos[0] - obs['robot_node'][0, 0, 0].cpu().numpy(),
+                                                   last_pos[1] - obs['robot_node'][0, 0, 1].cpu().numpy()]))
+            path += step_dist
 
             cur_angle = np.arctan2(obs['temporal_edges'][0, 0, 1].cpu().numpy(), obs['temporal_edges'][0, 0, 0].cpu().numpy())
             chc = chc +  abs(cur_angle - last_angle)
@@ -117,6 +118,7 @@ def evaluate(actor_critic, ob_rms, eval_envs, num_processes, device, config, log
         print('Reward={}'.format(episode_rew))
         print('Episode', k, 'ends in', stepCounter)
         path_lengths.append(path)
+        print('Path Length: ', path)
         chc_total.append(chc)
 
         if isinstance(infos[0]['info'], ReachGoal):
