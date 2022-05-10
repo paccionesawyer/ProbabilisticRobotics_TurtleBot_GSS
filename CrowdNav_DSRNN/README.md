@@ -64,7 +64,7 @@ This section identifies the major changes made to the code for the Probabilistic
 New models were also added to `data` folder.
 
 ## Contributions
-Augustus Brown compiled and ran all the training and testing of the models, as well as contributing to the implementation of the noisy model variation, as well as the report.
+Auguste Brown completed all the training and testing of the models, as well as contributing to the implementation of the noisy model and kalman filter model variations, as well as the report.
 
 Sawyer Paccione contributed to the development of the noisy and kalman filter model variations, as well as the report.
 
