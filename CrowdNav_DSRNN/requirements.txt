@@ -5,3 +5,5 @@ torchvision
 gym
 tensorflow
 matplotlib
+scipy
+filterpy
