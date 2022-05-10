@@ -71,11 +71,14 @@ class Config(object):
     robot.v_pref = 1  # max velocity of the robot
     # robot FOV = this values * PI
     robot.FOV = 2.
+    
+    # Added for project model variations
     robot.mode = "kalman" # "normal", "noisy", "kalman"
 
     # add noise to observation or not
     noise = BaseConfig()
     noise.add_noise = False
+    # Added to add noisy implementations
     # uniform, gaussian
     noise.type = "gaussian"
     noise.magnitude = 0.2
