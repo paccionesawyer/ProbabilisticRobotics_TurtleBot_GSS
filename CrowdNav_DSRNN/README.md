@@ -73,7 +73,7 @@ Stephanie Bentley contributed to development of the kalman filter variation, as 
 
 ## Acknowledgements
 
-This code is based on the code from Liu, et al.
+This code is based on the code from Liu, et al. The code also uses the FilterPy libary's KalmanFilter.
 
 S. Liu, P. Chang, W. Liang, N. Chakraborty, and K. Driggs-Campbell, “De-
 centralized structural-RNN for robot crowd navigation with deep reinforcement
