@@ -10,6 +10,7 @@ from filterpy.common import Q_discrete_white_noise
 class Robot(Agent):
     def __init__(self, config, section):
         super().__init__(config,section)
+        # Added fields to track believed state for noisy implementations
         self.px_bel = None
         self.py_bel = None
         self.vx_bel = None
@@ -26,6 +27,7 @@ class Robot(Agent):
         return action
 
     def set(self, px, py, gx, gy, vx, vy, theta, radius=None, v_pref=None):
+        # Set believed state to true state initially
         self.px = px
         self.py = py
         self.px_bel = px # initialize believed state to true state
@@ -42,33 +44,38 @@ class Robot(Agent):
             self.radius = radius
         if v_pref is not None:
             self.v_pref = v_pref
-
+        # Create Kalman Filter
         self.kf = self.kalman(px, py, vx, vy)
-
+    
+    # Added function to initialize Kalman Filter
     def kalman(self, px, py, vx, vy) -> KalmanFilter:
-        f = KalmanFilter(dim_x=4, dim_z=2, dim_u=2)
-
+        f = KalmanFilter(dim_x=4, dim_z=2, dim_u=2) # State 4x1, measurements 2x1, and control 2x1
+        
+        # Define KF state
         f.x = np.array([px, vx, py,  vy])
-
+        
+        # State transition matrix
         f.F = np.array([[1, self.time_step, 0,  0],
                         [0,  1, 0,  0],
                         [0,  0, 1, self.time_step],
                         [0,  0, 0,  1]])
-
+        # Process noise
         q = Q_discrete_white_noise(dim=2, dt=self.time_step, var=self.noise_magnitude ** 2)
         f.Q = block_diag(q, q)
-
+        
+        # Format of control vector must be difference between action and previous velocity
         # u = np.array((action.vx - self.vx), (action.vy - self.vy))
-
+        
+        # Control transition matrix
         f.B = np.array([[0, 1, 0, 0],
                        [0, 0, 0, 1]]).T
-
+        # Measurement function
         f.H = np.array([[1, 0, 0, 0],
                         [0, 0, 1, 0]])
-
+        # Measurement noise
         f.R = np.array([[self.noise_magnitude ** 2., 0],
                         [0, self.noise_magnitude ** 2]])
-
+        # Covariance matrix
         f.P = np.eye(4) * self.noise_magnitude ** 2.
 
         return f
@@ -83,7 +90,8 @@ class Robot(Agent):
     def actWithJointState(self,ob):
         action = self.policy.predict(ob)
         return action
-
+    
+    # Added function to access believed state for noisy implementation
     def get_noisy_full_state_noV(self):
         return [self.px_bel, self.py_bel, self.radius, self.gx, self.gy, self.v_pref, self.theta]
 
@@ -95,7 +103,8 @@ class Robot(Agent):
 
         pos = self.compute_position(action, self.time_step)
         self.px, self.py = pos
-
+        
+        # Added variations of robot computation for each model variation
         if (self.mode == "normal"):
             self.px_bel, self.py_bel = pos
         elif (self.mode == "noisy"):
@@ -110,7 +119,8 @@ class Robot(Agent):
             self.vy = action.vy
             # print("Actual state: ", [self.px, self.vx, self.py, self.vy])
             # print()
-
+    
+    # Added function to compute noise in position
     def compute_position_noise(self, action, delta_t):
         self.check_validity(action)
 
@@ -123,7 +133,8 @@ class Robot(Agent):
 
 
         return px, py
-
+     
+    # Added function to compute position using belief of Kalman Filter
     def compute_position_kf(self, action, delta_t):
         self.check_validity(action)
 
