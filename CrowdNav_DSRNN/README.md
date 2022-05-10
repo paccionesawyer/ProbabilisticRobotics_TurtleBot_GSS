@@ -1,6 +1,5 @@
 # DSRNN_CrowdNav
-This repository contains the code for the final project in Probabilistic Robotics
-
+This repository contains the code for the final project in Probabilistic Robotics, adapted from the paper "Decentralized Structural-RNN for Robot Crowd Navigation with Deep Reinforcement Learning" by Liu et al in ICRA 2021. Please refer to their [GitHub](https://github.com/Shuijing725/CrowdNav_DSRNN/) or [paper](https://arxiv.org/abs/2011.04820) for more information.
 
 ## Setup
 1. Install Python3.6 (The code may work with other versions of Python, but 3.6 is highly recommended).
@@ -32,7 +31,8 @@ Below are the instructions for training and testing policies.
 
 ### Change configurations
 1. Environment configurations and training hyperparameters: modify `crowd_nav/configs/config.py`
-
+    a. To run the simulation with the different conditions used in this project, change the `robot.mode` setting in the config file. 
+       `"normal"` is the baseline Liu et al. algorithm,  `"noisy"` the added noise variation, and  `"kalman"` the filtered algorithm.
 
 ### Run the code
 1. Train a policy. 
@@ -42,8 +42,10 @@ python train.py
 
 2. Test policies.   
 ```
-python test.py 
+python test.py --test_model [model_path]
 ```
+where `[model_path]` is the path to the directory for the model to test (eg `data/noisy_5e6` or `data/kalman_5e6` for the models created in this project).  
+
 
 This code is based on the code from Liu, et al.
 
